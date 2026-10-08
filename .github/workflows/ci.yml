@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Build, test and snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # the version the gas snapshot was written with: another forge may compile to other gas
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.3
+
+      - name: Build
+        run: forge build --sizes
+
+      # every test but the fork tests, which need a Robinhood Chain node
+      - name: Test
+        run: forge test --no-match-path "test/fork/*"
+        env:
+          FOUNDRY_DYNAMIC_TEST_LINKING: false
+
+      - name: Storage layout and gas snapshots
+        run: scripts/snapshots.sh
+
+  coverage:
+    name: Coverage (100%)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.3
+      - run: scripts/coverage.sh

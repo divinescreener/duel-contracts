@@ -1,0 +1,8 @@
+# what forge builds and measures
+out/
+cache/
+lcov.info
+# what forge script records of a deployment, a local fork's included (deployments/ keeps the real ones), and anything
+# holding a key or an RPC's secret
+broadcast/
+.env

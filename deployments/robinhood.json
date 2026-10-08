@@ -1,0 +1,47 @@
+{
+  "network": "Robinhood Chain",
+  "chainId": 4663,
+  "explorer": "https://robin.etherscan.io",
+  "version": {
+    "number": 1,
+    "codename": "Petunia"
+  },
+  "deployBlock": 80705328,
+  "owner": "0x427980911ad32b2b2FA6F5E2894Fa950783f84F2",
+  "treasury": "0x427980911ad32b2b2FA6F5E2894Fa950783f84F2",
+  "contracts": {
+    "DuelFactory": "0x3c6e7f9Bc507a442237AF1721B2294686495BD54",
+    "DuelHook": "0x5F746B7B1722e9bb3849EEa97061Df50F715AAEc",
+    "DuelRouter": "0x9e484C17E7d263F084Ab226a72FCdf301145d6D1",
+    "DuelLens": "0x1677d3C0a1F9Ae00519AD08C68674f63fe945389",
+    "DuelBootstrap": "0x84bB1c3152a2903f7fce5443ffCda7fF391d1F12"
+  },
+  "transactions": [
+    {
+      "hash": "0x74659d00f185274002d9a9ca8c1b9ccc1c24df9e945d0c492026dd4b55ca95d4",
+      "creates": [
+        "DuelBootstrap",
+        "DuelHook",
+        "DuelFactory"
+      ]
+    },
+    {
+      "hash": "0x98f9bf743dcda8ac5d123c109264e40eed32bfef014bf7e218ec8756501b015e",
+      "creates": [
+        "DuelRouter"
+      ]
+    },
+    {
+      "hash": "0xda7c6e5711a84cfb56e192e19981c266ce29711036972b2e13969dd993550a45",
+      "creates": [
+        "DuelLens"
+      ]
+    }
+  ],
+  "uniswap": {
+    "PoolManager": "0x8366a39CC670B4001A1121B8F6A443A643e40951",
+    "UniversalRouter": "0x204FAca1764B154221e35c0d20aBb3c525710498",
+    "V4Quoter": "0x8Dc178eFB8111BB0973Dd9d722ebeFF267c98F94",
+    "Permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+  }
+}

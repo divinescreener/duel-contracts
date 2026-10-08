@@ -1,0 +1,71 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.26"
+evm_version = "cancun"
+optimizer = true
+# 10,000 runs, not more: the hook keeps about 2.9 KB under the 24,576-byte limit on a contract's code (EIP-170), and
+# the bootstrap that deploys it with the factory under 300 bytes under the limit on a creation's (EIP-3860)
+optimizer_runs = 10000
+via_ir = true
+bytecode_hash = "none"
+gas_limit = "300000000"
+fs_permissions = [{ access = "read", path = "./" }]
+remappings = [
+    "@uniswap/v4-core/=lib/v4-core/",
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "forge-std/=lib/forge-std/src/",
+    "solmate/=lib/v4-core/lib/solmate/",
+]
+
+[profile.default.fuzz]
+runs = 256
+
+[profile.coverage]
+optimizer = false
+via_ir = false
+
+# Mutation testing (scripts/mutation.mjs): via-IR with the optimizer down to what `forge coverage --ir-minimum` keeps
+# (unused code removed, the stack allocated), the fastest build that still compiles the hook: about half the default's
+# time. Every test passes on it but the gas and size bounds of the optimized build, which the tester leaves out. Its
+# hook mines its CREATE2 salt (test/unit/DuelDeploy.t.sol) in more gas than the default limit, and a mutant's failures
+# stay apart from the default profile's (fuzz counterexamples are replayed, `--rerun` reads the failed tests). The
+# tester runs several forges at once, each in folders of its own under these.
+[profile.mutation]
+out = "out/mutation"
+cache_path = "cache/mutation"
+test_failures_file = "cache/mutation/test-failures"
+gas_limit = "3000000000"
+
+[profile.mutation.optimizer_details]
+peephole = false
+inliner = false
+jumpdestRemover = false
+orderLiterals = false
+deduplicate = false
+cse = false
+constantOptimizer = false
+yul = true
+
+[profile.mutation.optimizer_details.yulDetails]
+stackAllocation = true
+optimizerSteps = "u"
+
+[profile.mutation.fuzz]
+failure_persist_dir = "cache/mutation/fuzz"
+
+[rpc_endpoints]
+robinhood = "${ROBINHOOD_RPC_URL}"
+robinhood_testnet = "https://rpc.testnet.chain.robinhood.com/rpc"
+
+[lint]
+lint_on_build = false
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+quote_style = "double"
+number_underscore = "thousands"

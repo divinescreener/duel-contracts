@@ -1,0 +1,75 @@
+DuelHook
+  0:0 pairCount uint256
+  1:0 protocolFees uint256
+  2:0 protocolRateBps uint16
+  3:0 _pairs mapping(uint256 => struct DuelHook.Pair)
+  +0:0 _pairs[uint256].tokenA address
+  +1:0 _pairs[uint256].tokenD address
+  +2:0 _pairs[uint256].creator address
+  +3:0 _pairs[uint256].fees struct DuelHook.FeeConfig
+  +3:0 _pairs[uint256].fees.swapFeeBps uint16
+  +3:2 _pairs[uint256].fees.switchFeeBps uint16
+  +3:4 _pairs[uint256].fees.protocolShareBps uint16
+  +3:6 _pairs[uint256].fees.potShareBps uint16
+  +3:8 _pairs[uint256].fees.snipeStartBps uint16
+  +3:10 _pairs[uint256].fees.snipeWindow uint16
+  +4:0 _pairs[uint256].startTick int24
+  +4:3 _pairs[uint256].aIsCurrency0 bool
+  +4:4 _pairs[uint256].supporter bool
+  +4:5 _pairs[uint256].category uint8
+  +4:6 _pairs[uint256].roundTraded bool
+  +4:7 _pairs[uint256].launchTime uint40
+  +4:12 _pairs[uint256].lastAccrual uint40
+  +4:17 _pairs[uint256].roundStart uint40
+  +4:22 _pairs[uint256].roundEnd uint40
+  +4:27 _pairs[uint256].roundIndex uint32
+  +5:0 _pairs[uint256].tickCumulative int64
+  +5:8 _pairs[uint256].roundStartCumulative int64
+  +5:16 _pairs[uint256].emaA int40
+  +5:21 _pairs[uint256].emaD int40
+  +6:0 _pairs[uint256].pot uint128
+  +6:16 _pairs[uint256].creatorFees uint128
+  +7:0 _pairs[uint256].volume uint128
+  +7:16 _pairs[uint256].buybacks uint128
+  4:0 _poolRefs mapping(PoolId => uint256)
+DuelFactory
+  0:0 _owner address
+  1:0 _pendingOwner address
+  2:0 pendingConfigEta uint256
+  3:0 paused bool
+  4:0 _config struct DuelFactory.Config
+  4:0 _config.treasury address
+  4:20 _config.launchFee uint96
+  5:0 _config.startFdv uint96
+  5:12 _config.crossShareBps uint16
+  5:14 _config.swapFeeBps uint16
+  5:16 _config.switchFeeBps uint16
+  5:18 _config.protocolShareBps uint16
+  5:20 _config.potShareBps uint16
+  5:22 _config.snipeStartBps uint16
+  5:24 _config.snipeWindow uint16
+  6:0 _pendingConfig struct DuelFactory.Config
+  6:0 _pendingConfig.treasury address
+  6:20 _pendingConfig.launchFee uint96
+  7:0 _pendingConfig.startFdv uint96
+  7:12 _pendingConfig.crossShareBps uint16
+  7:14 _pendingConfig.swapFeeBps uint16
+  7:16 _pendingConfig.switchFeeBps uint16
+  7:18 _pendingConfig.protocolShareBps uint16
+  7:20 _pendingConfig.potShareBps uint16
+  7:22 _pendingConfig.snipeStartBps uint16
+  7:24 _pendingConfig.snipeWindow uint16
+  8:0 pendingCreator mapping(uint256 => address)
+DuelRouter
+DuelLens
+DuelToken
+  0:0 _balances mapping(address => uint256)
+  1:0 _allowances mapping(address => mapping(address => uint256))
+  2:0 _totalSupply uint256
+  3:0 _name string
+  4:0 _symbol string
+  5:0 _nameFallback string
+  6:0 _versionFallback string
+  7:0 _nonces mapping(address => uint256)
+  8:0 metadataURI string
+DuelSimulator
